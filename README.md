@@ -114,3 +114,6 @@ x.speak("Hello, World!")
 The path of the temporary directory (only used for Pico) is defined by the global variable `TMP_DIR`. The default temporary directory is `.tmp`.
 The path of the TTS directory (used to store all previously spoken text) is defined by the global variable `TTS_DIR`. The default TTS directory is `.tts`.
 The database is stored in `TTS_DIR/tts.db`.
+
+## Documentation
+The documentation for pytts can be found at https://pytts.docs.benmickler.com
