@@ -13,6 +13,7 @@ Welcome to pytts's documentation!
    tts_engines/nsss
    tts_engines/pico
    apis/rest
+   apis/socket
 
 Indices and tables
 ==================
