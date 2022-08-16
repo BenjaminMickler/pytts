@@ -103,8 +103,11 @@ pytts has a class for each synthesiser. The classes are:
 - pyttsx3
 - gctts
 
-Each class currently only has one method: `speak(text, sensitive=False)`
+Each class currently only has one method: `speak(text, sensitive=False, play=True)`
 If `sensitive` is true, the audio file will not be cached in the regular directory but rather a `tempfile.TemporaryDirectory()`, where it will only be accessible from this running program and will be destroyed with the program.
+If `play` is false, the text will only be synthesised and saved but not played back.
+
+The speak method returns the path of the audio file in which the synthesised text has been stored.
 
 Some classes such as polly have different parameters. Until I have written documentation, you'll have to look at the source code.
 ```Python
