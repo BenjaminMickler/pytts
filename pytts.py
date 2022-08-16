@@ -37,6 +37,9 @@ import io
 import json
 import tkinter as tk
 import time
+import logging
+
+logging.basicConfig(format='%(asctime)s: %(levelname)-8s %(message)s', datefmt='%Y-%m-%d %H:%M:%S', filename="pytts.log", encoding='utf-8', level=logging.DEBUG)
 
 import requests
 from playsound import playsound
@@ -44,46 +47,48 @@ from playsound import playsound
 try:
     from gtts import gTTS
 except:
-    pass
+    logging.warning("gtts not installed, gtts functionality will not be available")
 try:
     import boto3
 except:
-    pass
+    logging.warning("boto3 not installed, boto3 functionality will not be available")
 try:
     import ttspico
 except:
-    pass
+    logging.warning("ttspico not installed, ttspico functionality will not be available")
 try:
     import win32com.client
 except:
-    pass
+    logging.warning("win32com not installed, win32com functionality will not be available")
 try:
     from AppKit import NSSpeechSynthesizer
     import Foundation
 except:
-    pass
+    logging.warning("AppKit not installed, speech functionality will not be available")
 try:
     import pyttsx3 as _pyttsx3
 except:
-    pass
+    logging.warning("pyttsx3 not installed, pyttsx3 functionality will not be available")
 try:
     import google.cloud.texttospeech as _gctts
 except:
-    pass
+    logging.warning("google.cloud.texttospeech not installed, google.cloud.texttospeech functionality will not be available")
 try:
     from fastapi import FastAPI, APIRouter, Request
     from fastapi.responses import FileResponse
     from fastapi.staticfiles import StaticFiles
     import uvicorn
 except:
-    pass
+    logging.warning("fastapi not installed, REST API will not be available")
 
 TMP_DIR = ".tmp"
 TTS_DIR = ".tts"
 if not os.path.isdir(TTS_DIR):
     os.mkdir(TTS_DIR)
+    logging.debug(f"created TTS_DIR at {TTS_DIR}")
 if not os.path.isdir(TMP_DIR):
     os.mkdir(TMP_DIR)
+    logging.debug(f"created TMP_DIR at {TMP_DIR}")
 SENSITIVE_DIR = tempfile.TemporaryDirectory()
 connection = sqlite3.connect(TTS_DIR+"/tts.db")
 cursor = connection.cursor()
@@ -100,6 +105,7 @@ def add_row(table, text, row_uuid):
     cursor.execute("INSERT INTO "+table +
                    " (text, uuid) VALUES (?, ?)", (text, row_uuid))
     connection.commit()
+    logging.debug(f"added row {row_uuid} to {table} with text {text}")
     return uuid
 
 
@@ -122,16 +128,11 @@ def get_uuid_by_text(table, text):
     cursor.execute("SELECT uuid FROM "+table+" WHERE text = ?", (text,))
     return cursor.fetchone()[0]
 
-
-if not os.path.isdir(TMP_DIR):
-    os.mkdir(TMP_DIR)
-if not os.path.isdir(TTS_DIR):
-    os.mkdir(TTS_DIR)
-
-
 def cleanup():
     SENSITIVE_DIR.cleanup()
     shutil.rmtree(TMP_DIR)
+    logging.debug(f"removed TMP_DIR at {TMP_DIR}")
+    logging.debug(f"removed sensitive data at {SENSITIVE_DIR.name}")
 
 
 class polly:
@@ -151,6 +152,7 @@ class polly:
         self.engine = engine
         if not os.path.isdir(TTS_DIR+"/polly"):
             os.mkdir(TTS_DIR+"/polly")
+            logging.debug(f"created TTS_DIR/polly at {TTS_DIR}/polly")
         self.polly_client = boto3.Session(
             aws_access_key_id=aws_access_key_id,
             aws_secret_access_key=aws_secret_access_key,
@@ -200,6 +202,7 @@ class gtts:
         self.lang = lang
         if not os.path.isdir(TTS_DIR+"/gtts"):
             os.mkdir(TTS_DIR+"/gtts")
+            logging.debug(f"created TTS_DIR/gtts at {TTS_DIR}/gtts")
 
     def speak(self, text: str, sensitive: bool = False, play: bool = True) -> str:
         """_summary_
@@ -242,8 +245,10 @@ class pico:
         self.engine = ttspico.TtsEngine(self.lang, lang_dir="lang")
         if not os.path.isdir(TMP_DIR+"/pico"):
             os.mkdir(TMP_DIR+"/pico")
+            logging.debug(f"created TMP_DIR/pico at {TMP_DIR}/pico")
         if not os.path.isdir(TTS_DIR+"/pico"):
             os.mkdir(TTS_DIR+"/pico")
+            logging.debug(f"created TTS_DIR/pico at {TTS_DIR}/pico")
 
     def speak(self, text: str, sensitive: bool = False, play: bool = True) -> str:
         """_summary_
@@ -287,6 +292,7 @@ class sapi:
     def __init__(self):
         if not os.path.isdir(TTS_DIR+"/sapi"):
             os.mkdir(TTS_DIR+"/sapi")
+            logging.debug(f"created TTS_DIR/sapi at {TTS_DIR}/sapi")
         self.speaker = win32com.client.Dispatch("SAPI.SpVoice")
         self.filestream = win32com.client.Dispatch("SAPI.SpFileStream")
 
@@ -326,9 +332,11 @@ class nsss:
     def __init__(self):
         if not os.path.isdir(TTS_DIR+"/nsss"):
             os.mkdir(TTS_DIR+"/nsss")
+            logging.debug(f"created TTS_DIR/nsss at {TTS_DIR}/nsss")
         self.nssp = NSSpeechSynthesizer
         self.ve = self.nssp.alloc().init()
         self.ve.setRate_(100)
+        logging.debug(f"set nsss rate to {self.ve.rate()}")
 
     def speak(self, text: str, sensitive: bool = False, play: bool = True) -> str:
         """_summary_
@@ -371,6 +379,7 @@ class pyttsx3:
         self.engine = _pyttsx3.init()
         if not os.path.isdir(TTS_DIR+"/pyttsx3"):
             os.mkdir(TTS_DIR+"/pyttsx3")
+            logging.debug(f"created TTS_DIR/pyttsx3 at {TTS_DIR}/pyttsx3")
 
     def speak(self, text: str, sensitive: bool = False, play: bool = True) -> str:
         """_summary_
@@ -420,6 +429,7 @@ class gctts:
         self.client = _gctts.TextToSpeechClient()
         if not os.path.isdir(TTS_DIR+"/gctts"):
             os.mkdir(TTS_DIR+"/gctts")
+            logging.debug(f"created TTS_DIR/gctts at {TTS_DIR}/gctts")
 
     def speak(self, text: str, sensitive: bool = False, play: bool = True) -> str:
         """_summary_
@@ -456,7 +466,7 @@ class gctts:
 
 
 class custom:
-    def __init__(self, name: str, tts_gen_func, file_ext: str=".mp3"):
+    def __init__(self, name: str, tts_gen_func, file_ext: str = ".mp3"):
         """Custom: a class that wraps a custom TTS
         generator function and caches the generated files.
 
@@ -464,12 +474,13 @@ class custom:
             name (str): _description_
             tts_gen_func (_type_): _description_
             file_ext (str, optional): _description_. Defaults to ".mp3".
-        """        
+        """
         self.tts_gen_func = tts_gen_func
         self.name = name
         self.file_ext = file_ext
         if not os.path.isdir(TTS_DIR+"/"+name):
             os.mkdir(TTS_DIR+"/"+name)
+            logging.debug(f"created TTS_DIR/{name} at {TTS_DIR}/{name}")
 
     def speak(self, text: str, sensitive: bool = False, play: bool = True) -> str:
         """_summary_
@@ -481,7 +492,7 @@ class custom:
 
         Returns:
             str: _description_
-        """        
+        """
         if row_exists_by_text(self.name, text):
             text_uuid = get_uuid_by_text(self.name, text)
         else:
@@ -809,6 +820,10 @@ if __name__ == "__main__":
                                '--rest-server',
                                action='store_true',
                                help='run a REST API server')
+        argparser.add_argument('-w',
+                               '--web-server',
+                               action='store_true',
+                               help='run a web server')
         argparser.add_argument('-rc',
                                '--rest-client',
                                action='store_true',

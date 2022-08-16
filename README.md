@@ -17,7 +17,7 @@ pytts is a simple wrapper around many TTS synthesisers that caches spoken text. 
 - Google Text-to-Speech, Amazon Polly and Google Cloud Text-To-Speech require an internet connection to generate new speech
 
 ## To do
-- [ ] logging
+- [x] logging (a work in progress)
 - [x] database of previously spoken text rather than using as file name
 - [x] documentation (a work in progress)
 - [x] don't cache sensitive content
