@@ -6,8 +6,8 @@
 SPHINXOPTS    ?=
 SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = .
-BUILDDIR      = "../"
-HTMLCOPYDIR   = "../"
+BUILDDIR      = ../
+HTMLCOPYDIR   = ../
 
 # Put it first so that "make" without argument is like "make help".
 help:
@@ -21,6 +21,6 @@ help:
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 	cp -rT $(BUILDDIR)/html $(HTMLCOPYDIR)
 	rm -r $(BUILDDIR)/html
-	rm -r "../../__pycache__"
-	rm -r ".tts"
-	rm -r ".tmp"
+	#rm -r ".tts"
+	#rm -r ".tmp"
+	touch $(BUILDDIR)/.nojekyll
