@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 import sys
-sys.path.append("../")
+sys.path.append("../../")
 
 project = 'pytts'
 copyright = '2022, Benjamin Mickler'
