@@ -1,0 +1,5 @@
+google-cloud-texttospeech
+pyttsx3
+playsound
+boto3
+gtts

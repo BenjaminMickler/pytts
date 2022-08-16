@@ -1,0 +1,3 @@
+[submodule "py-ttspico"]
+	path = py-ttspico
+	url = https://github.com/sevangelatos/py-ttspico.git

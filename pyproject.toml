@@ -1,0 +1,20 @@
+[project]
+name = "pytts"
+version = "14082022"
+authors = [
+  { name="Benjamin Mickler", email="ben@benmickler.com" },
+]
+description = "pytts is a simple wrapper around many TTS synthesisers that caches spoken text"
+readme = "README.md"
+license = { file="LICENSE" }
+requires-python = ">=3.7"
+dependencies = ["playsound", "gtts", "boto3", "pyttsx3", "google-cloud-texttospeech"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GPLv3 License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/BenjaminMickler/pytts"
+"Bug Tracker" = "https://github.com/BenjaminMickler/pytts/issues"
