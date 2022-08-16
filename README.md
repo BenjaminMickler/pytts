@@ -18,7 +18,7 @@ pytts is a simple wrapper around many TTS synthesisers that caches spoken text. 
 
 ## To do
 - [x] database of previously spoken text rather than using as file name
-- [ ] documentation
+- [x] documentation (a work in progress)
 - [x] don't cache sensitive content
 - [ ] blocking and non-blocking synthesis/playback
 - [ ] asyncio support

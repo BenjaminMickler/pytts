@@ -12,7 +12,7 @@ sys.path.append("../../")
 project = 'pytts'
 copyright = '2022, Benjamin Mickler'
 author = 'Benjamin Mickler'
-release = '15082022'
+release = '16082022'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

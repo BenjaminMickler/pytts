@@ -21,3 +21,6 @@ help:
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 	cp -rT $(BUILDDIR)/html $(HTMLCOPYDIR)
 	rm -r $(BUILDDIR)/html
+	rm -r "../../__pycache__"
+	rm -r ".tts"
+	rm -r ".tmp"
