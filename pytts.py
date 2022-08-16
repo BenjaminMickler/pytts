@@ -135,7 +135,7 @@ def cleanup():
 
 
 class polly:
-    def __init__(self, aws_access_key_id: str, aws_secret_access_key: str, region_name: str, VoiceId: str, engine: str, output_format: str="mp3"):
+    def __init__(self, aws_access_key_id: str, aws_secret_access_key: str, region_name: str, VoiceId: str, engine: str, output_format: str = "mp3"):
         """_summary_
 
         Args:
@@ -145,7 +145,7 @@ class polly:
             VoiceId (str): _description_
             engine (str): _description_
             output_format (str, optional): _description_. Defaults to "mp3".
-        """        
+        """
         self.output_format = output_format
         self.VoiceId = VoiceId
         self.engine = engine
@@ -156,7 +156,7 @@ class polly:
             aws_secret_access_key=aws_secret_access_key,
             region_name=region_name).client('polly')
 
-    def speak(self, text: str, sensitive: bool=False, play: bool=True) -> str:
+    def speak(self, text: str, sensitive: bool = False, play: bool = True) -> str:
         """_summary_
 
         Args:
@@ -166,7 +166,7 @@ class polly:
 
         Returns:
             str: _description_
-        """        
+        """
         if row_exists_by_text("polly", text):
             text_uuid = get_uuid_by_text("polly", text)
         else:
@@ -174,7 +174,7 @@ class polly:
         fn = TTS_DIR+"/polly/"+text_uuid+"."+self.output_format
         if sensitive:
             fn = SENSITIVE_DIR.name+"/"+text_uuid+"."+self.output_format
-        if not row_exists_by_uuid("polly", text_uuid):
+        if not row_exists_by_uuid("polly", text_uuid) or sensitive:
             response = self.polly_client.synthesize_speech(VoiceId=self.VoiceId,
                                                            OutputFormat=self.output_format,
                                                            Text=text,
@@ -191,17 +191,17 @@ class polly:
 
 
 class gtts:
-    def __init__(self, lang: str="en"):
+    def __init__(self, lang: str = "en"):
         """_summary_
 
         Args:
             lang (str, optional): _description_. Defaults to "en".
-        """        
+        """
         self.lang = lang
         if not os.path.isdir(TTS_DIR+"/gtts"):
             os.mkdir(TTS_DIR+"/gtts")
 
-    def speak(self, text: str, sensitive: bool=False, play: bool=True) -> str:
+    def speak(self, text: str, sensitive: bool = False, play: bool = True) -> str:
         """_summary_
 
         Args:
@@ -211,7 +211,7 @@ class gtts:
 
         Returns:
             str: _description_
-        """        
+        """
         if row_exists_by_text("gtts", text):
             text_uuid = get_uuid_by_text("gtts", text)
         else:
@@ -219,7 +219,7 @@ class gtts:
         fn = TTS_DIR+"/gtts/"+text_uuid+".mp3"
         if sensitive:
             fn = SENSITIVE_DIR.name+"/"+text_uuid+".mp3"
-        if not row_exists_by_uuid("gtts", text_uuid):
+        if not row_exists_by_uuid("gtts", text_uuid) or sensitive:
             gttsobj = gTTS(text=text, lang=self.lang, slow=False)
             gttsobj.save(fn)
             add_row("gtts", text, text_uuid)
@@ -232,12 +232,12 @@ class gtts:
 
 
 class pico:
-    def __init__(self, lang: str="en-US"):
+    def __init__(self, lang: str = "en-US"):
         """_summary_
 
         Args:
             lang (str, optional): _description_. Defaults to "en-US".
-        """        
+        """
         self.lang = lang
         self.engine = ttspico.TtsEngine(self.lang, lang_dir="lang")
         if not os.path.isdir(TMP_DIR+"/pico"):
@@ -245,7 +245,7 @@ class pico:
         if not os.path.isdir(TTS_DIR+"/pico"):
             os.mkdir(TTS_DIR+"/pico")
 
-    def speak(self, text: str, sensitive: bool=False, play: bool=True) -> str:
+    def speak(self, text: str, sensitive: bool = False, play: bool = True) -> str:
         """_summary_
 
         Args:
@@ -255,7 +255,7 @@ class pico:
 
         Returns:
             str: _description_
-        """        
+        """
         if row_exists_by_text("pico", text):
             text_uuid = get_uuid_by_text("pico", text)
         else:
@@ -265,7 +265,7 @@ class pico:
         if sensitive:
             fn = SENSITIVE_DIR.name+"/"+text_uuid+".wav"
             raw_fn = SENSITIVE_DIR.name+"/"+text_uuid+".raw"
-        if not row_exists_by_uuid("pico", text_uuid):
+        if not row_exists_by_uuid("pico", text_uuid) or sensitive:
             audio = self.engine.speak(text)
             with open(raw_fn, "wb") as outfile:
                 outfile.write(audio)
@@ -290,7 +290,7 @@ class sapi:
         self.speaker = win32com.client.Dispatch("SAPI.SpVoice")
         self.filestream = win32com.client.Dispatch("SAPI.SpFileStream")
 
-    def speak(self, text: str, sensitive: bool=False, play: bool=True) -> str:
+    def speak(self, text: str, sensitive: bool = False, play: bool = True) -> str:
         """_summary_
 
         Args:
@@ -300,7 +300,7 @@ class sapi:
 
         Returns:
             str: _description_
-        """        
+        """
         if row_exists_by_text("sapi", text):
             text_uuid = get_uuid_by_text("sapi", text)
         else:
@@ -308,7 +308,7 @@ class sapi:
         fn = TTS_DIR+"/sapi/"+text_uuid+".wav"
         if sensitive:
             fn = SENSITIVE_DIR.name+"/"+text_uuid+".wav"
-        if not row_exists_by_uuid("sapi", text_uuid):
+        if not row_exists_by_uuid("sapi", text_uuid) or sensitive:
             self.filestream.open(fn, 3, False)
             self.speaker.AudioOutputStream = self.filestream
             self.speaker.speak(text)
@@ -330,7 +330,7 @@ class nsss:
         self.ve = self.nssp.alloc().init()
         self.ve.setRate_(100)
 
-    def speak(self, text: str, sensitive: bool=False, play: bool=True) -> str:
+    def speak(self, text: str, sensitive: bool = False, play: bool = True) -> str:
         """_summary_
 
         Args:
@@ -340,7 +340,7 @@ class nsss:
 
         Returns:
             str: _description_
-        """        
+        """
         if row_exists_by_text("nsss", text):
             text_uuid = get_uuid_by_text("nsss", text)
         else:
@@ -348,7 +348,7 @@ class nsss:
         fn = TTS_DIR+"/nsss/"+text_uuid+".aiff"
         if sensitive:
             fn = SENSITIVE_DIR.name+"/"+text_uuid+".aiff"
-        if not row_exists_by_uuid("nsss", text_uuid):
+        if not row_exists_by_uuid("nsss", text_uuid) or sensitive:
             url = Foundation.NSURL.fileURLWithPath_(fn)
             self.ve.startSpeakingString_toURL_(text, url)
             add_row("nsss", text, text_uuid)
@@ -361,18 +361,18 @@ class nsss:
 
 
 class pyttsx3:
-    def __init__(self, lang: str="en"):
+    def __init__(self, lang: str = "en"):
         """_summary_
 
         Args:
             lang (str, optional): _description_. Defaults to "en".
-        """        
+        """
         self.lang = lang
         self.engine = _pyttsx3.init()
         if not os.path.isdir(TTS_DIR+"/pyttsx3"):
             os.mkdir(TTS_DIR+"/pyttsx3")
 
-    def speak(self, text: str, sensitive: bool=False, play: bool=True) -> str:
+    def speak(self, text: str, sensitive: bool = False, play: bool = True) -> str:
         """_summary_
 
         Args:
@@ -382,7 +382,7 @@ class pyttsx3:
 
         Returns:
             str: _description_
-        """        
+        """
         if row_exists_by_text("pyttsx3", text):
             text_uuid = get_uuid_by_text("pyttsx3", text)
         else:
@@ -390,7 +390,7 @@ class pyttsx3:
         fn = TTS_DIR+"/pyttsx3/"+text_uuid+".mp3"
         if sensitive:
             fn = SENSITIVE_DIR.name+"/"+text_uuid+".mp3"
-        if not row_exists_by_uuid("pyttsx3", text_uuid):
+        if not row_exists_by_uuid("pyttsx3", text_uuid) or sensitive:
             self.engine.save_to_file(text, fn)
             self.engine.runAndWait()
             add_row("pyttsx3", text, text_uuid)
@@ -410,7 +410,7 @@ class gctts:
 
         Args:
             voice_name (str): _description_
-        """        
+        """
         language_code = "-".join(voice_name.split("-")[:2])
         self.voice_params = _gctts.VoiceSelectionParams(
             language_code=language_code, name=voice_name
@@ -421,7 +421,7 @@ class gctts:
         if not os.path.isdir(TTS_DIR+"/gctts"):
             os.mkdir(TTS_DIR+"/gctts")
 
-    def speak(self, text: str, sensitive: bool=False, play: bool=True) -> str:
+    def speak(self, text: str, sensitive: bool = False, play: bool = True) -> str:
         """_summary_
 
         Args:
@@ -431,7 +431,7 @@ class gctts:
 
         Returns:
             str: _description_
-        """        
+        """
         if row_exists_by_text("gctts", text):
             text_uuid = get_uuid_by_text("gctts", text)
         else:
@@ -439,7 +439,7 @@ class gctts:
         fn = TTS_DIR+"/gctts/"+text_uuid+".wav"
         if sensitive:
             fn = SENSITIVE_DIR+"/"+text_uuid+".wav"
-        if not row_exists_by_uuid("nsss", text_uuid):
+        if not row_exists_by_uuid("nsss", text_uuid) or sensitive:
             text_input = _gctts.SynthesisInput(text=text)
             response = self.client.synthesize_speech(
                 input=text_input, voice=self.voice_params, audio_config=self.audio_config
@@ -455,13 +455,58 @@ class gctts:
         return fn
 
 
+class custom:
+    def __init__(self, name: str, tts_gen_func, file_ext: str=".mp3"):
+        """Custom: a class that wraps a custom TTS
+        generator function and caches the generated files.
+
+        Args:
+            name (str): _description_
+            tts_gen_func (_type_): _description_
+            file_ext (str, optional): _description_. Defaults to ".mp3".
+        """        
+        self.tts_gen_func = tts_gen_func
+        self.name = name
+        self.file_ext = file_ext
+        if not os.path.isdir(TTS_DIR+"/"+name):
+            os.mkdir(TTS_DIR+"/"+name)
+
+    def speak(self, text: str, sensitive: bool = False, play: bool = True) -> str:
+        """_summary_
+
+        Args:
+            text (str): _description_
+            sensitive (bool, optional): _description_. Defaults to False.
+            play (bool, optional): _description_. Defaults to True.
+
+        Returns:
+            str: _description_
+        """        
+        if row_exists_by_text(self.name, text):
+            text_uuid = get_uuid_by_text(self.name, text)
+        else:
+            text_uuid = str(uuid.uuid4())
+        fn = TTS_DIR+"/"+self.name+"/"+text_uuid+self.file_ext
+        if sensitive:
+            fn = SENSITIVE_DIR.name+"/"+text_uuid+self.file_ext
+        if not row_exists_by_uuid(self.name, text_uuid) or sensitive:
+            self.tts_gen_func(text, fn)
+            add_row(self.name, text, text_uuid)
+            if play:
+                playsound(fn)
+        else:
+            if play:
+                playsound(fn)
+        return fn
+
+
 class socket_api:
     def __init__(self, tts: pyttsx3 | gctts | nsss | sapi | pico | gtts | polly):
         """_summary_
 
         Args:
             tts (pyttsx3 | gctts | nsss | sapi | pico | gtts | polly): _description_
-        """        
+        """
         self.tts = tts
 
     async def handle(self, reader: StreamReader, writer):
@@ -503,7 +548,7 @@ class socket_api:
 
         Args:
             port (int): _description_
-        """        
+        """
         server = await asyncio.start_server(self.handle, '0.0.0.0', port)
         addrs = ', '.join(str(sock.getsockname()) for sock in server.sockets)
         async with server:
@@ -519,14 +564,14 @@ class socket_client:
         self.reader, self.writer = await asyncio.open_connection(self.ipaddr, self.port)
         return self.reader, self.writer
 
-    async def speak(self, text: str, play: bool=True, save: bool=False) -> None:
+    async def speak(self, text: str, play: bool = True, save: bool = False) -> None:
         """_summary_
 
         Args:
             text (str): _description_
             play (bool, optional): _description_. Defaults to True.
             save (bool, optional): _description_. Defaults to False.
-        """        
+        """
         self.writer.write((json.dumps({"text": text})+"\r\n").encode())
         await self.writer.drain()
         buffer = b""
@@ -556,7 +601,7 @@ class _rest_api:
 
         Args:
             tts (pyttsx3 | gctts | nsss | sapi | pico | gtts | polly): _description_
-        """        
+        """
         self.tts = tts
         self.router = APIRouter()
         self.router.add_api_route("/speak", self.speak, methods=["POST"])
@@ -569,7 +614,7 @@ class _rest_api:
 
         Returns:
             FileResponse: _description_
-        """        
+        """
         req_info = await info.json()
         fn = self.tts.speak(
             req_info["text"], sensitive=req_info["sensitive"], play=False)
@@ -584,7 +629,7 @@ async def create_server(app: FastAPI, port: int) -> None:
     Args:
         app (FastAPI): _description_
         port (int): _description_
-    """    
+    """
     server_config = uvicorn.Config(app, port=port)
     server = uvicorn.Server(server_config)
     await server.serve()
@@ -598,11 +643,12 @@ def rest_api(tts: pyttsx3 | gctts | nsss | sapi | pico | gtts | polly) -> FastAP
 
     Returns:
         FastAPI: _description_
-    """    
+    """
     app = FastAPI()
     api_obj = _rest_api(tts)
     app.include_router(api_obj.router)
     return app
+
 
 class rest_client:
     def __init__(self, ipaddr: str, port: int):
@@ -611,18 +657,18 @@ class rest_client:
         Args:
             ipaddr (str): _description_
             port (int): _description_
-        """        
+        """
         self.ipaddr = ipaddr
         self.port = port
 
-    def speak(self, text: str, play: bool=True, save: bool=False) -> None:
+    def speak(self, text: str, play: bool = True, save: bool = False) -> None:
         """_summary_
 
         Args:
             text (str): _description_
             play (bool, optional): _description_. Defaults to True.
             save (bool, optional): _description_. Defaults to False.
-        """        
+        """
         json_data = {
             "text": "hello world",
             "sensitive": False
@@ -649,14 +695,14 @@ async def _socket_client(text, ipaddr: str, port: int) -> None:
         text (_type_): _description_
         ipaddr (str): _description_
         port (int): _description_
-    """    
+    """
     sc = socket_client(ipaddr, port)
     await sc.connect()
     await sc.speak(text)
 
 
 class tkinter_GUI:
-    
+
     def __init__(self):
         self.root = tk.Tk()
         self.root.title("Text to Speech")
@@ -704,7 +750,7 @@ def web_GUI() -> FastAPI:
 
     Returns:
         FastAPI: _description_
-    """    
+    """
     app = FastAPI()
     app.mount("/", StaticFiles(directory="static"), name="static")
     return app
@@ -715,7 +761,7 @@ async def rest_and_web_servers(args: argparse.Namespace) -> None:
 
     Args:
         args (argparse.Namespace): _description_
-    """    
+    """
     done, pending = await asyncio.wait(
         [
             create_server(rest_api(engines[args.engine]()), args.port),
