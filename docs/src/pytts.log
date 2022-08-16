@@ -1,0 +1,6 @@
+2022-08-16 21:11:31: WARNING  ttspico not installed, ttspico functionality will not be available
+2022-08-16 21:11:31: WARNING  win32com not installed, win32com functionality will not be available
+2022-08-16 21:11:31: WARNING  AppKit not installed, speech functionality will not be available
+2022-08-16 21:11:31: WARNING  google.cloud.texttospeech not installed, google.cloud.texttospeech functionality will not be available
+2022-08-16 21:11:31: DEBUG    created TTS_DIR at .tts
+2022-08-16 21:11:31: DEBUG    created TMP_DIR at .tmp
