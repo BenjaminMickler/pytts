@@ -1,0 +1,134 @@
+2022-08-17 10:13:21: WARNING  ttspico not installed, ttspico functionality will not be available
+2022-08-17 10:13:21: WARNING  win32com not installed, win32com functionality will not be available
+2022-08-17 10:13:21: WARNING  AppKit not installed, speech functionality will not be available
+2022-08-17 10:13:21: WARNING  google.cloud.texttospeech not installed, google.cloud.texttospeech functionality will not be available
+2022-08-17 10:13:22: DEBUG    created TTS_DIR at .tts
+2022-08-17 10:13:22: DEBUG    created TMP_DIR at .tmp
+2022-08-17 10:13:22: DEBUG    created TTS_DIR/pyttsx3 at .tts/pyttsx3
+2022-08-17 10:13:22: DEBUG    added row 40f73a71-a209-47d9-98a4-0efda0f61287 to pyttsx3 with text hello ben mickler is a law abiding citizen
+2022-08-17 10:13:23: DEBUG    Starting play
+2022-08-17 10:13:26: DEBUG    Finishing play
+2022-08-17 10:13:37: WARNING  ttspico not installed, ttspico functionality will not be available
+2022-08-17 10:13:37: WARNING  win32com not installed, win32com functionality will not be available
+2022-08-17 10:13:37: WARNING  AppKit not installed, speech functionality will not be available
+2022-08-17 10:13:37: WARNING  google.cloud.texttospeech not installed, google.cloud.texttospeech functionality will not be available
+2022-08-17 10:13:37: DEBUG    Starting play
+2022-08-17 10:13:40: DEBUG    Finishing play
+2022-08-17 10:16:46: WARNING  ttspico not installed, ttspico functionality will not be available
+2022-08-17 10:16:46: WARNING  win32com not installed, win32com functionality will not be available
+2022-08-17 10:16:46: WARNING  AppKit not installed, speech functionality will not be available
+2022-08-17 10:16:46: WARNING  google.cloud.texttospeech not installed, google.cloud.texttospeech functionality will not be available
+2022-08-17 10:17:55: WARNING  ttspico not installed, ttspico functionality will not be available
+2022-08-17 10:17:55: WARNING  win32com not installed, win32com functionality will not be available
+2022-08-17 10:17:55: WARNING  AppKit not installed, speech functionality will not be available
+2022-08-17 10:17:55: WARNING  google.cloud.texttospeech not installed, google.cloud.texttospeech functionality will not be available
+2022-08-17 10:17:55: DEBUG    created TTS_DIR/polly at .tts/polly
+2022-08-17 10:17:55: DEBUG    Changing event name from creating-client-class.iot-data to creating-client-class.iot-data-plane
+2022-08-17 10:17:55: DEBUG    Changing event name from before-call.apigateway to before-call.api-gateway
+2022-08-17 10:17:55: DEBUG    Changing event name from request-created.machinelearning.Predict to request-created.machine-learning.Predict
+2022-08-17 10:17:55: DEBUG    Changing event name from before-parameter-build.autoscaling.CreateLaunchConfiguration to before-parameter-build.auto-scaling.CreateLaunchConfiguration
+2022-08-17 10:17:55: DEBUG    Changing event name from before-parameter-build.route53 to before-parameter-build.route-53
+2022-08-17 10:17:55: DEBUG    Changing event name from request-created.cloudsearchdomain.Search to request-created.cloudsearch-domain.Search
+2022-08-17 10:17:55: DEBUG    Changing event name from docs.*.autoscaling.CreateLaunchConfiguration.complete-section to docs.*.auto-scaling.CreateLaunchConfiguration.complete-section
+2022-08-17 10:17:55: DEBUG    Changing event name from before-parameter-build.logs.CreateExportTask to before-parameter-build.cloudwatch-logs.CreateExportTask
+2022-08-17 10:17:55: DEBUG    Changing event name from docs.*.logs.CreateExportTask.complete-section to docs.*.cloudwatch-logs.CreateExportTask.complete-section
+2022-08-17 10:17:55: DEBUG    Changing event name from before-parameter-build.cloudsearchdomain.Search to before-parameter-build.cloudsearch-domain.Search
+2022-08-17 10:17:56: DEBUG    Changing event name from docs.*.cloudsearchdomain.Search.complete-section to docs.*.cloudsearch-domain.Search.complete-section
+2022-08-17 10:17:56: DEBUG    Setting config variable for region to 'ap-southeast-2'
+2022-08-17 10:17:56: DEBUG    Loading JSON file: /home/ben/.local/lib/python3.10/site-packages/botocore/data/endpoints.json
+2022-08-17 10:17:56: DEBUG    Loading JSON file: /home/ben/.local/lib/python3.10/site-packages/botocore/data/sdk-default-configuration.json
+2022-08-17 10:17:56: DEBUG    Event choose-service-name: calling handler <function handle_service_name_alias at 0x7fe74f1b71c0>
+2022-08-17 10:17:56: DEBUG    Loading JSON file: /home/ben/.local/lib/python3.10/site-packages/botocore/data/polly/2016-06-10/service-2.json
+2022-08-17 10:17:56: DEBUG    Event creating-client-class.polly: calling handler <function add_generate_presigned_url at 0x7fe74f174ee0>
+2022-08-17 10:17:56: DEBUG    Setting polly timeout as (60, 60)
+2022-08-17 10:17:56: DEBUG    Loading JSON file: /home/ben/.local/lib/python3.10/site-packages/botocore/data/_retry.json
+2022-08-17 10:17:56: DEBUG    Registering retry handlers for service: polly
+2022-08-17 10:17:56: DEBUG    Event before-parameter-build.polly.SynthesizeSpeech: calling handler <function generate_idempotent_uuid at 0x7fe74f208ca0>
+2022-08-17 10:17:56: DEBUG    Event before-call.polly.SynthesizeSpeech: calling handler <function add_recursion_detection_header at 0x7fe74f208940>
+2022-08-17 10:17:56: DEBUG    Event before-call.polly.SynthesizeSpeech: calling handler <function inject_api_version_header_if_needed at 0x7fe74f20a4d0>
+2022-08-17 10:17:56: DEBUG    Making request for OperationModel(name=SynthesizeSpeech) with params: {'url_path': '/v1/speech', 'query_string': {}, 'method': 'POST', 'headers': {'Content-Type': 'application/json', 'User-Agent': 'Boto3/1.24.51 Python/3.10.6 Linux/5.18.16-200.fc36.x86_64 Botocore/1.27.51'}, 'body': b'{"VoiceId": "Olivia", "OutputFormat": "mp3", "Text": "hello ben mickler is a law abiding citizen", "Engine": "neural"}', 'url': 'https://polly.ap-southeast-2.amazonaws.com/v1/speech', 'context': {'client_region': 'ap-southeast-2', 'client_config': <botocore.config.Config object at 0x7fe74e2e3ca0>, 'has_streaming_input': False, 'auth_type': None}}
+2022-08-17 10:17:56: DEBUG    Event request-created.polly.SynthesizeSpeech: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x7fe74e2e3b80>>
+2022-08-17 10:17:56: DEBUG    Event choose-signer.polly.SynthesizeSpeech: calling handler <function set_operation_specific_signer at 0x7fe74f208b80>
+2022-08-17 10:17:56: DEBUG    Calculating signature using v4 auth.
+2022-08-17 10:17:56: DEBUG    CanonicalRequest:
+POST
+/v1/speech
+
+content-type:application/json
+host:polly.ap-southeast-2.amazonaws.com
+x-amz-date:20220817T001756Z
+
+content-type;host;x-amz-date
+4fdfb48aedfcd60607e07074cecaba46e57e4dda9343fa2e9ae36f987b448e20
+2022-08-17 10:17:56: DEBUG    StringToSign:
+AWS4-HMAC-SHA256
+20220817T001756Z
+20220817/ap-southeast-2/polly/aws4_request
+6ad37ebc52afe08ddc2055f16bcb256a1ae940f34932bc398353aea156887183
+2022-08-17 10:17:56: DEBUG    Signature:
+f3845b93d38b5499d89faad3bda8601bc47da4184cc55be785c1c63b9645ed4c
+2022-08-17 10:17:56: DEBUG    Event request-created.polly.SynthesizeSpeech: calling handler <function add_retry_headers at 0x7fe74f20ab90>
+2022-08-17 10:17:56: DEBUG    Sending http request: <AWSPreparedRequest stream_output=True, method=POST, url=https://polly.ap-southeast-2.amazonaws.com/v1/speech, headers={'Content-Type': b'application/json', 'User-Agent': b'Boto3/1.24.51 Python/3.10.6 Linux/5.18.16-200.fc36.x86_64 Botocore/1.27.51', 'X-Amz-Date': b'20220817T001756Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAZ2VT5FRVWIZXHFOE/20220817/ap-southeast-2/polly/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=f3845b93d38b5499d89faad3bda8601bc47da4184cc55be785c1c63b9645ed4c', 'amz-sdk-invocation-id': b'9eb4ef32-7133-4d82-ab63-c71cc0a5ba3c', 'amz-sdk-request': b'attempt=1', 'Content-Length': '118'}>
+2022-08-17 10:17:56: DEBUG    Certificate path: /home/ben/.local/lib/python3.10/site-packages/certifi/cacert.pem
+2022-08-17 10:17:56: DEBUG    Starting new HTTPS connection (1): polly.ap-southeast-2.amazonaws.com:443
+2022-08-17 10:17:56: DEBUG    https://polly.ap-southeast-2.amazonaws.com:443 "POST /v1/speech HTTP/1.1" 200 None
+2022-08-17 10:17:56: DEBUG    Response headers: {'x-amzn-RequestId': '9e3a92d0-2958-4ea1-8fc5-5b4478bc46b8', 'x-amzn-RequestCharacters': '42', 'Content-Type': 'audio/mpeg', 'Transfer-Encoding': 'chunked', 'Date': 'Wed, 17 Aug 2022 00:17:56 GMT'}
+2022-08-17 10:17:56: DEBUG    Response body:
+<botocore.response.StreamingBody object at 0x7fe74df051b0>
+2022-08-17 10:17:56: DEBUG    Event needs-retry.polly.SynthesizeSpeech: calling handler <botocore.retryhandler.RetryHandler object at 0x7fe74df04580>
+2022-08-17 10:17:56: DEBUG    No retry needed.
+2022-08-17 10:17:57: DEBUG    added row 68d8e6ab-e42e-45f1-8289-9127de2ef0d0 to polly with text hello ben mickler is a law abiding citizen
+2022-08-17 10:17:57: DEBUG    Starting play
+2022-08-17 10:18:00: DEBUG    Finishing play
+2022-08-17 10:18:21: WARNING  ttspico not installed, ttspico functionality will not be available
+2022-08-17 10:18:21: WARNING  win32com not installed, win32com functionality will not be available
+2022-08-17 10:18:21: WARNING  AppKit not installed, speech functionality will not be available
+2022-08-17 10:18:21: WARNING  google.cloud.texttospeech not installed, google.cloud.texttospeech functionality will not be available
+2022-08-17 10:18:22: DEBUG    Changing event name from creating-client-class.iot-data to creating-client-class.iot-data-plane
+2022-08-17 10:18:22: DEBUG    Changing event name from before-call.apigateway to before-call.api-gateway
+2022-08-17 10:18:22: DEBUG    Changing event name from request-created.machinelearning.Predict to request-created.machine-learning.Predict
+2022-08-17 10:18:22: DEBUG    Changing event name from before-parameter-build.autoscaling.CreateLaunchConfiguration to before-parameter-build.auto-scaling.CreateLaunchConfiguration
+2022-08-17 10:18:22: DEBUG    Changing event name from before-parameter-build.route53 to before-parameter-build.route-53
+2022-08-17 10:18:22: DEBUG    Changing event name from request-created.cloudsearchdomain.Search to request-created.cloudsearch-domain.Search
+2022-08-17 10:18:22: DEBUG    Changing event name from docs.*.autoscaling.CreateLaunchConfiguration.complete-section to docs.*.auto-scaling.CreateLaunchConfiguration.complete-section
+2022-08-17 10:18:22: DEBUG    Changing event name from before-parameter-build.logs.CreateExportTask to before-parameter-build.cloudwatch-logs.CreateExportTask
+2022-08-17 10:18:22: DEBUG    Changing event name from docs.*.logs.CreateExportTask.complete-section to docs.*.cloudwatch-logs.CreateExportTask.complete-section
+2022-08-17 10:18:22: DEBUG    Changing event name from before-parameter-build.cloudsearchdomain.Search to before-parameter-build.cloudsearch-domain.Search
+2022-08-17 10:18:22: DEBUG    Changing event name from docs.*.cloudsearchdomain.Search.complete-section to docs.*.cloudsearch-domain.Search.complete-section
+2022-08-17 10:18:22: DEBUG    Setting config variable for region to 'ap-southeast-2'
+2022-08-17 10:18:22: DEBUG    Loading JSON file: /home/ben/.local/lib/python3.10/site-packages/botocore/data/endpoints.json
+2022-08-17 10:18:22: DEBUG    Loading JSON file: /home/ben/.local/lib/python3.10/site-packages/botocore/data/sdk-default-configuration.json
+2022-08-17 10:18:22: DEBUG    Event choose-service-name: calling handler <function handle_service_name_alias at 0x7f59506bf1c0>
+2022-08-17 10:18:22: DEBUG    Loading JSON file: /home/ben/.local/lib/python3.10/site-packages/botocore/data/polly/2016-06-10/service-2.json
+2022-08-17 10:18:22: DEBUG    Event creating-client-class.polly: calling handler <function add_generate_presigned_url at 0x7f595067cee0>
+2022-08-17 10:18:22: DEBUG    Setting polly timeout as (60, 60)
+2022-08-17 10:18:22: DEBUG    Loading JSON file: /home/ben/.local/lib/python3.10/site-packages/botocore/data/_retry.json
+2022-08-17 10:18:22: DEBUG    Registering retry handlers for service: polly
+2022-08-17 10:18:22: DEBUG    Starting play
+2022-08-17 10:18:25: DEBUG    Finishing play
+2022-08-17 12:38:38: WARNING  ttspico not installed, ttspico functionality will not be available
+2022-08-17 12:38:38: WARNING  win32com not installed, win32com functionality will not be available
+2022-08-17 12:38:38: WARNING  AppKit not installed, speech functionality will not be available
+2022-08-17 12:38:38: WARNING  google.cloud.texttospeech not installed, google.cloud.texttospeech functionality will not be available
+2022-08-17 12:38:39: DEBUG    Changing event name from creating-client-class.iot-data to creating-client-class.iot-data-plane
+2022-08-17 12:38:39: DEBUG    Changing event name from before-call.apigateway to before-call.api-gateway
+2022-08-17 12:38:39: DEBUG    Changing event name from request-created.machinelearning.Predict to request-created.machine-learning.Predict
+2022-08-17 12:38:39: DEBUG    Changing event name from before-parameter-build.autoscaling.CreateLaunchConfiguration to before-parameter-build.auto-scaling.CreateLaunchConfiguration
+2022-08-17 12:38:39: DEBUG    Changing event name from before-parameter-build.route53 to before-parameter-build.route-53
+2022-08-17 12:38:39: DEBUG    Changing event name from request-created.cloudsearchdomain.Search to request-created.cloudsearch-domain.Search
+2022-08-17 12:38:39: DEBUG    Changing event name from docs.*.autoscaling.CreateLaunchConfiguration.complete-section to docs.*.auto-scaling.CreateLaunchConfiguration.complete-section
+2022-08-17 12:38:39: DEBUG    Changing event name from before-parameter-build.logs.CreateExportTask to before-parameter-build.cloudwatch-logs.CreateExportTask
+2022-08-17 12:38:39: DEBUG    Changing event name from docs.*.logs.CreateExportTask.complete-section to docs.*.cloudwatch-logs.CreateExportTask.complete-section
+2022-08-17 12:38:39: DEBUG    Changing event name from before-parameter-build.cloudsearchdomain.Search to before-parameter-build.cloudsearch-domain.Search
+2022-08-17 12:38:39: DEBUG    Changing event name from docs.*.cloudsearchdomain.Search.complete-section to docs.*.cloudsearch-domain.Search.complete-section
+2022-08-17 12:38:39: DEBUG    Setting config variable for region to 'ap-southeast-2'
+2022-08-17 12:38:39: DEBUG    Loading JSON file: /home/ben/.local/lib/python3.10/site-packages/botocore/data/endpoints.json
+2022-08-17 12:38:39: DEBUG    Loading JSON file: /home/ben/.local/lib/python3.10/site-packages/botocore/data/sdk-default-configuration.json
+2022-08-17 12:38:39: DEBUG    Event choose-service-name: calling handler <function handle_service_name_alias at 0x7ffb2a02b1c0>
+2022-08-17 12:38:39: DEBUG    Loading JSON file: /home/ben/.local/lib/python3.10/site-packages/botocore/data/polly/2016-06-10/service-2.json
+2022-08-17 12:38:39: DEBUG    Event creating-client-class.polly: calling handler <function add_generate_presigned_url at 0x7ffb29fe8ee0>
+2022-08-17 12:38:39: DEBUG    Setting polly timeout as (60, 60)
+2022-08-17 12:38:39: DEBUG    Loading JSON file: /home/ben/.local/lib/python3.10/site-packages/botocore/data/_retry.json
+2022-08-17 12:38:39: DEBUG    Registering retry handlers for service: polly
+2022-08-17 12:38:39: DEBUG    Starting play
+2022-08-17 12:38:42: DEBUG    Finishing play

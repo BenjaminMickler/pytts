@@ -2,7 +2,7 @@ __author__ = "Benjamin Mickler"
 __copyright__ = "Copyright 2022, Benjamin Mickler"
 __credits__ = ["Benjamin Mickler"]
 __license__ = "GPLv3 or later"
-__version__ = "16082022"
+__version__ = "10092022"
 __maintainer__ = "Benjamin Mickler"
 __email__ = "ben@benmickler.com"
 
@@ -81,24 +81,30 @@ try:
 except:
     logging.warning("fastapi not installed, REST API will not be available")
 
-TMP_DIR = ".tmp"
-TTS_DIR = ".tts"
-if not os.path.isdir(TTS_DIR):
-    os.mkdir(TTS_DIR)
-    logging.debug(f"created TTS_DIR at {TTS_DIR}")
-if not os.path.isdir(TMP_DIR):
-    os.mkdir(TMP_DIR)
-    logging.debug(f"created TMP_DIR at {TMP_DIR}")
-SENSITIVE_DIR = tempfile.TemporaryDirectory()
-connection = sqlite3.connect(TTS_DIR+"/tts.db")
-cursor = connection.cursor()
-cursor.execute("create table if not exists polly (text TEXT, uuid TEXT)")
-cursor.execute("create table if not exists gtts (text TEXT, uuid TEXT)")
-cursor.execute("create table if not exists pico (text TEXT, uuid TEXT)")
-cursor.execute("create table if not exists sapi (text TEXT, uuid TEXT)")
-cursor.execute("create table if not exists nsss (text TEXT, uuid TEXT)")
-cursor.execute("create table if not exists pyttsx3 (text TEXT, uuid TEXT)")
-cursor.execute("create table if not exists gctts (text TEXT, uuid TEXT)")
+def init(TMP=".tmp", TTS=".tts"):
+    global TMP_DIR
+    global TTS_DIR
+    TMP_DIR = TMP
+    TTS_DIR = TTS
+    global SENSITIVE_DIR
+    global connection
+    global cursor
+    if not os.path.isdir(TTS_DIR):
+        os.mkdir(TTS_DIR)
+        logging.debug(f"created TTS_DIR at {TTS_DIR}")
+    if not os.path.isdir(TMP_DIR):
+        os.mkdir(TMP_DIR)
+        logging.debug(f"created TMP_DIR at {TMP_DIR}")
+    SENSITIVE_DIR = tempfile.TemporaryDirectory()
+    connection = sqlite3.connect(TTS_DIR+"/tts.db")
+    cursor = connection.cursor()
+    cursor.execute("create table if not exists polly (text TEXT, uuid TEXT)")
+    cursor.execute("create table if not exists gtts (text TEXT, uuid TEXT)")
+    cursor.execute("create table if not exists pico (text TEXT, uuid TEXT)")
+    cursor.execute("create table if not exists sapi (text TEXT, uuid TEXT)")
+    cursor.execute("create table if not exists nsss (text TEXT, uuid TEXT)")
+    cursor.execute("create table if not exists pyttsx3 (text TEXT, uuid TEXT)")
+    cursor.execute("create table if not exists gctts (text TEXT, uuid TEXT)")
 
 
 def add_row(table, text, row_uuid):
